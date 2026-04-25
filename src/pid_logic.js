@@ -23,12 +23,15 @@ class PIDController {
      * @returns {number} The control output.
      */
     compute(error) {
-        // TODO: Implement P-control logic: output = error * Kp
-        // TODO: Handle Saturation (clipping the output between minOutput and maxOutput)
+        // Implement P-control logic: output = error * Kp
+        let output = error * this.kp;
         
-        let output = 0;
-        
-        // Your code here...
+        // Handle Saturation (clipping the output between minOutput and maxOutput)
+        if (output > this.maxOutput) {
+            output = this.maxOutput;
+        } else if (output < this.minOutput) {
+            output = this.minOutput;
+        }
         
         return output;
     }

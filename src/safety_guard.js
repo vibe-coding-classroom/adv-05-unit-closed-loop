@@ -27,9 +27,9 @@ class SafetyGuard {
             this.framesSinceLastTarget++;
         }
 
-        // TODO: Implement "Vision Loss" detection logic.
-        // If framesSinceLastTarget exceeds timeoutFrames, trigger sendEmergencyStop().
-        if (this.framesSinceLastTarget > this.timeoutFrames) {
+        // Implement "Vision Loss" detection logic.
+        // If framesSinceLastTarget exceeds timeoutFrames, trigger failsafe.
+        if (this.framesSinceLastTarget >= this.timeoutFrames) {
             this.triggerFailsafe();
             return false;
         }

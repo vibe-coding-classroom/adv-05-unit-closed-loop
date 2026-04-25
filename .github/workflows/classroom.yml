@@ -1,0 +1,51 @@
+name: GitHub Classroom Workflow
+
+on: [push]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Run PID Linearity Test
+        id: linearity
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: PID Linearity
+          setup-command: npm install
+          command: npx jest tests/controller.test.js
+          timeout: 10
+          max-score: 50
+
+      - name: Run Stability & Safety Test
+        id: stability
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: Stability & Safety
+          setup-command: npm install
+          command: npx jest tests/loop_stability.test.js
+          timeout: 10
+          max-score: 50
+
+      - name: Autograding Reporter
+        uses: education/autograding-grading-reporter@v1
+        env:
+          LINEARITY_RESULTS: "${{steps.linearity.outputs.result}}"
+          STABILITY_RESULTS: "${{steps.stability.outputs.result}}"
+        with:
+          runners: linearity,stability

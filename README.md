@@ -1,5 +1,3 @@
-Viewed adv-05-unit-closed-loop.html:1-438
-
 針對 **`adv-05-unit-closed-loop` (視覺閉迴路控制理論)** 單元，這是一個集大成的關鍵課程，將「視覺感知」、「數學量化」與「物理執行」串聯成一個完整的自動化循環。
 
 以下是在 **GitHub Classroom** 部署其作業 (Assignments) 的具體建議：
